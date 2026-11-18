@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="km" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="ប្រព័ន្ធចុះឈ្មោះវគ្គសិក្សាសិស្សអនឡាញ - Student Course Registration System built with modern CSS Grid, Flexbox, and Vanilla JavaScript">
+    <meta name="theme-color" content="#1e3a8a">
+
+    <title>ប្រព័ន្ធចុះឈ្មោះវគ្គសិក្សាសិស្ស | Student Course Registration Portal</title>
+
+    <!-- Favicon (SVG Data URI) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+
+    <!-- Preconnect & Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome 6 Pro CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Accessible Skip to Main Content Link -->
+    <a href="#main-content" class="skip-to-content">រំលងទៅកាន់មាតិកាចម្បង (Skip to content)</a>
+
+    <!-- ======================================================================
+         TOP NOTIFICATION BAR (Flexbox)
+         ====================================================================== -->
+    <aside class="top-announcement-bar" role="complementary" aria-label="Announcement">
+        <div class="container announcement-inner">
+            <div class="announcement-text">
+                <span class="badge-pill pulse"><i class="fa-solid fa-bolt"></i> បើកទទួលសិស្សថ្មី</span>
+                <span>វគ្គសិក្សាជំនាន់ទី ១៥ ទទួលបានអាហារូបករណ៍បញ្ចុះតម្លៃ ២០% សម្រាប់សិស្ស ៥០ នាក់ដំបូង!</span>
+            </div>
+            <div class="announcement-links">
+                <span class="hotline"><i class="fa-solid fa-phone-volume"></i> ជំនួយការ៖ <strong>(+855) 23 888 999</strong></span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ======================================================================
+         SITE HEADER & NAVIGATION (Flexbox)
+         ====================================================================== -->
+    <header class="site-header" role="banner">
+        <div class="container header-container">
+            
+            <!-- Brand Identity -->
+            <a href="#home" class="brand-logo" aria-label="EduPortal Homepage">
+                <div class="brand-icon-wrapper">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="brand-details">
+                    <span class="brand-title">EduPortal<span class="brand-accent">.kh</span></span>
+                    <span class="brand-tagline">Student Registration System</span>
+                </div>
+            </a>
+
+            <!-- Mobile Menu Toggle Button (Accessible) -->
+            <button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="បើកបញ្ជីម៉ឺនុយ">
+                <i class="fa-solid fa-bars menu-open-icon"></i>
+                <i class="fa-solid fa-xmark menu-close-icon d-none"></i>
+            </button>
+
+            <!-- Navigation Bar: Steps 1, 2, 3, 4, 5 (Flexbox) -->
+            <nav class="main-nav" id="primaryNav" role="navigation" aria-label="Main Navigation">
+                <ul class="nav-list" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a href="#home" class="nav-link active" role="menuitem">
+                            <span class="nav-badge" aria-hidden="true">1</span>
+                            <span class="nav-text">ទំព័រដើម</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#courses" class="nav-link" role="menuitem">
+                            <span class="nav-badge" aria-hidden="true">2</span>
+                            <span class="nav-text">វគ្គសិក្សា</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#register" class="nav-link highlight-link" role="menuitem">
+                            <span class="nav-badge" aria-hidden="true">3</span>
+                            <span class="nav-text">ចុះឈ្មោះចូលរៀន</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#about" class="nav-link" role="menuitem">
+                            <span class="nav-badge" aria-hidden="true">4</span>
+                            <span class="nav-text">អំពីវិទ្យាស្ថាន</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="#contact" class="nav-link" role="menuitem">
+                            <span class="nav-badge" aria-hidden="true">5</span>
+                            <span class="nav-text">ទំនាក់ទំនង</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header Quick Action -->
+            <div class="header-actions">
+                <a href="#register" class="btn btn-primary btn-cta">
+                    <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                    <span>ចុះឈ្មោះឥឡូវនេះ</span>
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ======================================================================
+         HERO SECTION (Flexbox & Responsive Container)
+         ====================================================================== -->
+    <section id="home" class="hero-section" aria-labelledby="heroHeading">
+        <div class="hero-particles" aria-hidden="true"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-pill">
+                    <i class="fa-solid fa-award"></i> ស្ដង់ដារបណ្ដុះបណ្ដាលវិជ្ជាជីវៈកម្រិតខ្ពស់
+                </div>
+                <h1 id="heroHeading" class="hero-title">
+                    ប្រព័ន្ធចុះឈ្មោះចូលរៀន <br>
+                    <span class="gradient-text">ជំនាញបច្ចេកវិទ្យា និងវិទ្យាសាស្ត្រកុំព្យូទ័រ</span>
+                </h1>
+                <p class="hero-description">
+                    អភិវឌ្ឍន៍សមត្ថភាពរបស់អ្នកជាមួយវគ្គសិក្សាដែលតម្រង់ទិសទីផ្សារការងារផ្ទាល់។ រៀនជាមួយគ្រូឧទ្ទេសដែលមានបទពិសោធន៍ឧស្សាហកម្មពិតប្រាកដ និងទទួលបានគម្រោងជាក់ស្តែង (Hands-on Projects)។
+                </p>
+                <div class="hero-actions-flex">
+                    <a href="#courses" class="btn btn-outline-light">
+                        <i class="fa-solid fa-shapes"></i> មើលវគ្គសិក្សាទាំង ៤
+                    </a>
+                    <a href="#register" class="btn btn-secondary-accent">
+                        <i class="fa-solid fa-file-pen"></i> បំពេញបែបបទចុះឈ្មោះ
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Highlights Counter (Flexbox) -->
+            <div class="hero-stats-wrapper">
+                <div class="hero-stat-box">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">វគ្គសិក្សាឯកទេស</div>
+                </div>
+                <div class="hero-stat-box">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">អត្រាបញ្ចប់ការសិក្សា</div>
+                </div>
+                <div class="hero-stat-box">
+                    <div class="stat-number">1,200+</div>
+                    <div class="stat-label">សិស្សបានចុះឈ្មោះ</div>
+                </div>
+                <div class="hero-stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">វិញ្ញាបនបត្រទទួលស្គាល់</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         MAIN CONTENT AREA
+         ====================================================================== -->
+    <main id="main-content" class="main-content">
+
+        <!-- ==================================================================
+             SECTION 1: COURSE CARDS (CSS GRID)
+             ================================================================== -->
+        <section id="courses" class="section-block courses-area" aria-labelledby="coursesHeading">
+            <div class="container">
+                
+                <header class="section-title-wrapper text-center">
+                    <span class="section-kicker"><i class="fa-solid fa-grid-2"></i> Intensive Programs</span>
+                    <h2 id="coursesHeading" class="section-main-title">វគ្គសិក្សាពេញនិយមទាំង ៤ (Course Cards)</h2>
+                    <p class="section-lead-text">ជ្រើសរើសវគ្គសិក្សាដែលស្របនឹងគោលដៅការងាររបស់អ្នក រួចចុច «ជ្រើសរើសវគ្គនេះ» ដើម្បីចុះឈ្មោះភ្លាមៗ</p>
+                </header>
+
+                <!-- CSS GRID: 4 Course Cards Layout -->
+                <div class="course-cards-grid" role="region" aria-label="Course Listings">
+
+                    <!-- CARD 1: Full-Stack Web Development -->
+                    <article class="course-card" data-course-code="WEB-101" data-course-title="Full-Stack Web Development" data-course-fee="$180">
+                        <div class="course-card-visual">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=700&q=80" alt="Full-Stack Web Development Course" loading="lazy">
+                            <span class="course-tag popular"><i class="fa-solid fa-fire"></i> ពេញនិយម</span>
+                            <div class="course-level-badge"><i class="fa-solid fa-layer-group"></i> កម្រិតដំបូង - កម្រិតខ្ពស់</div>
+                        </div>
+
+                        <div class="course-card-content">
+                            <div class="course-meta-top">
+                                <span class="course-code-pill">WEB-101</span>
+                                <span class="course-rating" aria-label="Rating 4.9 of 5">
+                                    <i class="fa-solid fa-star"></i> 4.9 (184 នាក់)
+                                </span>
+                            </div>
+
+                            <h3 class="course-name">Full-Stack Web Development</h3>
+                            <p class="course-summary">
+                                កសាងគេហទំព័រពេញលេញពី Frontend ដល់ Backend ដោយប្រើប្រាស់ HTML5, Modern CSS (Grid/Flexbox), JavaScript ES6+, React, Node.js និង MongoDB/PostgreSQL។
+                            </p>
+
+                            <div class="course-features-list">
+                                <div class="feature-item"><i class="fa-regular fa-clock"></i> <strong>៣ ខែ</strong> (សរុប ៧២ ម៉ោង)</div>
+                                <div class="feature-item"><i class="fa-solid fa-chalkboard-user"></i> សាស្ត្រាចារ្យ៖ <strong>សុខ ចាន់ថុល</strong></div>
+                                <div class="feature-item"><i class="fa-solid fa-laptop-code"></i> គម្រោងអនុវត្តផ្ទាល់ចំនួន <strong>៤ គម្រោង</strong></div>
+                            </div>
+
+                            <div class="course-card-footer">
+                                <div class="price-container">
+                                    <span class="price-caption">តម្លៃសិក្សាពេញ</span>
+                                    <span class="price-amount">$180 <small class="currency-tag">USD</small></span>
+                                </div>
+                                <button type="button" class="btn btn-select-course" data-target-code="WEB-101" data-target-name="Full-Stack Web Development" data-target-price="$180" aria-label="ជ្រើសរើសវគ្គ Full-Stack Web Development">
+                                    <i class="fa-solid fa-circle-check"></i> ជ្រើសរើសវគ្គនេះ
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- CARD 2: Python Programming & Data Science -->
+                    <article class="course-card" data-course-code="PY-201" data-course-title="Python Programming & Data Science" data-course-fee="$195">
+                        <div class="course-card-visual">
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=700&q=80" alt="Python & Data Science" loading="lazy">
+                            <span class="course-tag hot"><i class="fa-solid fa-chart-line"></i> HOT 2026</span>
+                            <div class="course-level-badge"><i class="fa-solid fa-layer-group"></i> មធ្យម - កម្រិតខ្ពស់</div>
+                        </div>
+
+                        <div class="course-card-content">
+                            <div class="course-meta-top">
+                                <span class="course-code-pill">PY-201</span>
+                                <span class="course-rating" aria-label="Rating 4.8 of 5">
+                                    <i class="fa-solid fa-star"></i> 4.8 (142 នាក់)
+                                </span>
+                            </div>
+
+                            <h3 class="course-name">Python Programming & Data Science</h3>
+                            <p class="course-summary">
+                                រៀនវិភាគទិន្នន័យ Data Analysis, Visualization, Pandas, NumPy, Machine Learning algorithms និងការបង្កើតគំរូទស្សន៍ទាយទិន្នន័យអាជីវកម្ម។
+                            </p>
+
+                            <div class="course-features-list">
+                                <div class="feature-item"><i class="fa-regular fa-clock"></i> <strong>៣ ខែ</strong> (សរុប ៦០ ម៉ោង)</div>
+                                <div class="feature-item"><i class="fa-solid fa-chalkboard-user"></i> សាស្ត្រាចារ្យ៖ <strong>គឹម លីនដា</strong></div>
+                                <div class="feature-item"><i class="fa-solid fa-database"></i> ការអនុវត្តទិន្នន័យជាក់ស្តែង <strong>Datasets</strong></div>
+                            </div>
+
+                            <div class="course-card-footer">
+                                <div class="price-container">
+                                    <span class="price-caption">តម្លៃសិក្សាពេញ</span>
+                                    <span class="price-amount">$195 <small class="currency-tag">USD</small></span>
+                                </div>
+                                <button type="button" class="btn btn-select-course" data-target-code="PY-201" data-target-name="Python Programming & Data Science" data-target-price="$195" aria-label="ជ្រើសរើសវគ្គ Python Programming & Data Science">
+                                    <i class="fa-solid fa-circle-check"></i> ជ្រើសរើសវគ្គនេះ
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- CARD 3: UI/UX Design Masterclass -->
+                    <article class="course-card" data-course-code="UI-301" data-course-title="UI/UX Design Masterclass" data-course-fee="$160">
+                        <div class="course-card-visual">
+                            <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=700&q=80" alt="UI/UX Design Masterclass" loading="lazy">
+                            <span class="course-tag new"><i class="fa-solid fa-wand-magic-sparkles"></i> កម្មវិធីថ្មី</span>
+                            <div class="course-level-badge"><i class="fa-solid fa-layer-group"></i> គ្រប់កម្រិតសិក្សា</div>
+                        </div>
+
+                        <div class="course-card-content">
+                            <div class="course-meta-top">
+                                <span class="course-code-pill">UI-301</span>
+                                <span class="course-rating" aria-label="Rating 4.9 of 5">
+                                    <i class="fa-solid fa-star"></i> 4.9 (110 នាក់)
+                                </span>
+                            </div>
+
+                            <h3 class="course-name">UI/UX Design Masterclass</h3>
+                            <p class="course-summary">
+                                យល់ដឹងពី User Experience, User Research, Wireframing, Figma Advanced Prototyping, Design Systems និងការបង្កើត Portfolio ដាក់ពាក្យធ្វើការ។
+                            </p>
+
+                            <div class="course-features-list">
+                                <div class="feature-item"><i class="fa-regular fa-clock"></i> <strong>២.៥ ខែ</strong> (សរុប ៥០ ម៉ោង)</div>
+                                <div class="feature-item"><i class="fa-solid fa-chalkboard-user"></i> សាស្ត្រាចារ្យ៖ <strong>វ៉ាន់ ពិសិដ្ឋ</strong></div>
+                                <div class="feature-item"><i class="fa-brands fa-figma"></i> កសាង Design Portfolio <strong>២ ឈុត</strong></div>
+                            </div>
+
+                            <div class="course-card-footer">
+                                <div class="price-container">
+                                    <span class="price-caption">តម្លៃសិក្សាពេញ</span>
+                                    <span class="price-amount">$160 <small class="currency-tag">USD</small></span>
+                                </div>
+                                <button type="button" class="btn btn-select-course" data-target-code="UI-301" data-target-name="UI/UX Design Masterclass" data-target-price="$160" aria-label="ជ្រើសរើសវគ្គ UI/UX Design Masterclass">
+                                    <i class="fa-solid fa-circle-check"></i> ជ្រើសរើសវគ្គនេះ
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- CARD 4: Mobile App Development with Flutter -->
+                    <article class="course-card" data-course-code="MOB-401" data-course-title="Mobile App Development with Flutter" data-course-fee="$200">
+                        <div class="course-card-visual">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=700&q=80" alt="Mobile App Development" loading="lazy">
+                            <span class="course-tag pro"><i class="fa-solid fa-crown"></i> PRO SPECIAL</span>
+                            <div class="course-level-badge"><i class="fa-solid fa-layer-group"></i> មធ្យម - កម្រិតខ្ពស់</div>
+                        </div>
+
+                        <div class="course-card-content">
+                            <div class="course-meta-top">
+                                <span class="course-code-pill">MOB-401</span>
+                                <span class="course-rating" aria-label="Rating 4.8 of 5">
+                                    <i class="fa-solid fa-star"></i> 4.8 (98 នាក់)
+                                </span>
+                            </div>
+
+                            <h3 class="course-name">Mobile App Development (Flutter)</h3>
+                            <p class="course-summary">
+                                បង្កើតកម្មវិធីទូរស័ព្ទ Cross-Platform សម្រាប់ទាំង iOS និង Android ដោយប្រើ Flutter Framework, Dart Language, State Management (Bloc) និង REST APIs/Firebase។
+                            </p>
+
+                            <div class="course-features-list">
+                                <div class="feature-item"><i class="fa-regular fa-clock"></i> <strong>៣ ខែ</strong> (សរុប ៧០ ម៉ោង)</div>
+                                <div class="feature-item"><i class="fa-solid fa-chalkboard-user"></i> សាស្ត្រាចារ្យ៖ <strong>ហេង រតនា</strong></div>
+                                <div class="feature-item"><i class="fa-solid fa-mobile-screen"></i> បង្កើត Apps បង្ហោះលើ <strong>Store</strong></div>
+                            </div>
+
+                            <div class="course-card-footer">
+                                <div class="price-container">
+                                    <span class="price-caption">តម្លៃសិក្សាពេញ</span>
+                                    <span class="price-amount">$200 <small class="currency-tag">USD</small></span>
+                                </div>
+                                <button type="button" class="btn btn-select-course" data-target-code="MOB-401" data-target-name="Mobile App Development with Flutter" data-target-price="$200" aria-label="ជ្រើសរើសវគ្គ Mobile App Development with Flutter">
+                                    <i class="fa-solid fa-circle-check"></i> ជ្រើសរើសវគ្គនេះ
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div><!-- End CSS GRID -->
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SECTION 2: REGISTRATION FORM (CSS GRID + FLEXBOX)
+             ================================================================== -->
+        <section id="register" class="section-block registration-area" aria-labelledby="formMainHeading">
+            <div class="container">
+                
+                <div class="form-container-card">
+
+                    <!-- Form Header (Flexbox) -->
+                    <div class="form-card-header">
+                        <div class="header-icon-box">
+                            <i class="fa-solid fa-address-card" aria-hidden="true"></i>
+                        </div>
+                        <div class="header-copy">
+                            <span class="badge-tag"><i class="fa-solid fa-pen-nib"></i> Online Application</span>
+                            <h2 id="formMainHeading" class="form-title">ទម្រង់បែបបទចុះឈ្មោះចូលរៀន (Student Registration Form)</h2>
+                            <p class="form-subtext">សូមពិនិត្យ និងបំពេញរាល់ព័ត៌មានដែលចាំបាច់ (មានសញ្ញា <span class="required-indicator">*</span>) ឱ្យបានត្រឹមត្រូវ</p>
+                        </div>
+                    </div>
+
+                    <!-- Selected Course Context Ribbon -->
+                    <div id="courseSelectedRibbon" class="course-selected-ribbon d-none" role="status" aria-live="polite">
+                        <div class="ribbon-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="ribbon-content">
+                            <span>លោកអ្នកកំពុងចុះឈ្មោះលើវគ្គ៖ <strong id="ribbonCourseTitle" class="highlight-text">...</strong></span>
+                            <span class="ribbon-price-badge" id="ribbonCourseFee">$0</span>
+                        </div>
+                        <button type="button" id="clearCourseSelectionBtn" class="btn-ribbon-clear" aria-label="ប្តូរវគ្គសិក្សា">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <!-- Global Validation Alert Banner -->
+                    <div id="formGlobalAlert" class="alert-banner alert-danger d-none" role="alert" aria-live="assertive">
+                        <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+                        <div class="alert-text">
+                            <strong>ទម្រង់បែបបទមិនទាន់ត្រឹមត្រូវនៅឡើយទេ៖</strong>
+                            <span id="globalAlertMessage">សូមពិនិត្យប្រអប់ទិន្នន័យដែលមានពណ៌ក្រហមខាងក្រោម!</span>
+                        </div>
+                    </div>
+
+                    <!-- FORM START -->
+                    <form id="studentRegistrationForm" class="registration-form" novalidate autocomplete="on">
+
+                        <!-- CSS GRID: Form Fields (2 Columns on Desktop) -->
+                        <div class="form-grid-layout">
+
+                            <!-- Field 1: Full Name -->
+                            <div class="form-field-group" id="groupFullName">
+                                <label for="fullName" class="field-label">
+                                    <span class="label-text"><i class="fa-regular fa-user"></i> ឈ្មោះពេញសិស្ស (Full Name)</span>
+                                    <span class="required-indicator" aria-hidden="true">*</span>
+                                </label>
+                                <div class="input-control-wrapper">
+                                    <input type="text" id="fullName" name="fullName" class="form-input" placeholder="ឧ. ឈិន ពិសិដ្ឋ ឬ Chhin Piseth" autocomplete="name" required aria-required="true" aria-describedby="fullNameHint fullNameError">
+                                    <span class="field-status-icon" aria-hidden="true"></span>
+                                </div>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-hint" id="fullNameHint">បញ្ចូលឈ្មោះជាភាសាខ្មែរ ឬឡាតាំង (យ៉ាងតិច ៣ តួ)</span>
+                                    <span class="field-error" id="fullNameError" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Field 2: Student ID -->
+                            <div class="form-field-group" id="groupStudentId">
+                                <label for="studentId" class="field-label">
+                                    <span class="label-text"><i class="fa-solid fa-id-badge"></i> អត្តលេខសិស្ស (Student ID)</span>
+                                    <span class="required-indicator" aria-hidden="true">*</span>
+                                </label>
+                                <div class="input-control-wrapper">
+                                    <input type="text" id="studentId" name="studentId" class="form-input uppercase-text" placeholder="ឧ. STU-2026 ឬ B202601" autocomplete="off" required aria-required="true" aria-describedby="studentIdHint studentIdError">
+                                    <span class="field-status-icon" aria-hidden="true"></span>
+                                </div>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-hint" id="studentIdHint">អក្សរ ឬលេខកូដសិស្សយ៉ាងតិច ៣ តួ</span>
+                                    <span class="field-error" id="studentIdError" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Field 3: Email Address -->
+                            <div class="form-field-group" id="groupEmail">
+                                <label for="email" class="field-label">
+                                    <span class="label-text"><i class="fa-regular fa-envelope"></i> អាសយដ្ឋានអ៊ីមែល (Email Address)</span>
+                                    <span class="required-indicator" aria-hidden="true">*</span>
+                                </label>
+                                <div class="input-control-wrapper">
+                                    <input type="email" id="email" name="email" class="form-input" placeholder="student.name@domain.com" autocomplete="email" required aria-required="true" aria-describedby="emailHint emailError">
+                                    <span class="field-status-icon" aria-hidden="true"></span>
+                                </div>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-hint" id="emailHint">សម្រាប់ទទួលព័ត៌មានចូលរៀន និងវិញ្ញាបនបត្រ</span>
+                                    <span class="field-error" id="emailError" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Field 4: Phone Number -->
+                            <div class="form-field-group" id="groupPhone">
+                                <label for="phone" class="field-label">
+                                    <span class="label-text"><i class="fa-solid fa-phone"></i> លេខទូរស័ព្ទ (Phone Number)</span>
+                                    <span class="required-indicator" aria-hidden="true">*</span>
+                                </label>
+                                <div class="input-control-wrapper">
+                                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="012 345 678 ឬ 098 765 432" autocomplete="tel" required aria-required="true" aria-describedby="phoneHint phoneError">
+                                    <span class="field-status-icon" aria-hidden="true"></span>
+                                </div>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-hint" id="phoneHint">លេខទូរស័ព្ទកម្ពុជា ៨ ដល់ ១១ ខ្ទង់</span>
+                                    <span class="field-error" id="phoneError" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Field 5: Select Course -->
+                            <div class="form-field-group" id="groupCourseSelect">
+                                <label for="courseSelect" class="field-label">
+                                    <span class="label-text"><i class="fa-solid fa-graduation-cap"></i> ជ្រើសរើសវគ្គសិក្សា (Course Selection)</span>
+                                    <span class="required-indicator" aria-hidden="true">*</span>
+                                </label>
+                                <div class="select-control-wrapper">
+                                    <select id="courseSelect" name="courseSelect" class="form-select" required aria-required="true" aria-describedby="courseSelectError">
+                                        <option value="" disabled selected>-- សូមជ្រើសរើសវគ្គបណ្តុះបណ្តាល --</option>
+                                        <option value="WEB-101" data-name="Full-Stack Web Development" data-price="$180">WEB-101: Full-Stack Web Development ($180)</option>
+                                        <option value="PY-201" data-name="Python Programming & Data Science" data-price="$195">PY-201: Python Programming & Data Science ($195)</option>
+                                        <option value="UI-301" data-name="UI/UX Design Masterclass" data-price="$160">UI-301: UI/UX Design Masterclass ($160)</option>
+                                        <option value="MOB-401" data-name="Mobile App Development with Flutter" data-price="$200">MOB-401: Mobile App Development with Flutter ($200)</option>
+                                    </select>
+                                    <span class="select-arrow" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                                </div>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-error" id="courseSelectError" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Field 6: Shift / Schedule -->
+                            <div class="form-field-group" id="groupStudyShift">
+                                <label for="studyShift" class="field-label">
+                                    <span class="label-text"><i class="fa-regular fa-calendar-check"></i> វេនសិក្សា (Study Shift / Schedule)</span>
+                                    <span class="required-indicator" aria-hidden="true">*</span>
+                                </label>
+                                <div class="select-control-wrapper">
+                                    <select id="studyShift" name="studyShift" class="form-select" required aria-required="true" aria-describedby="studyShiftError">
+                                        <option value="" disabled selected>-- ជ្រើសរើសវេនសិក្សាដែលត្រូវនឹងពេលទំនេរ --</option>
+                                        <option value="Morning (08:00 AM - 10:30 AM)">វេនព្រឹក (08:00 AM - 10:30 AM) [ច័ន្ទ-សុក្រ]</option>
+                                        <option value="Afternoon (02:00 PM - 04:30 PM)">វេនរសៀល (02:00 PM - 04:30 PM) [ច័ន្ទ-សុក្រ]</option>
+                                        <option value="Evening (05:30 PM - 07:30 PM)">វេនយប់ (05:30 PM - 07:30 PM) [ច័ន្ទ-សុក្រ]</option>
+                                        <option value="Weekend (Sat - Sun)">វេនចុងសប្តាហ៍ (08:30 AM - 04:30 PM) [សៅរ៍-អាទិត្យ]</option>
+                                    </select>
+                                    <span class="select-arrow" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                                </div>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-error" id="studyShiftError" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Field 7: Gender (Fieldset with Flexbox Radio Items) -->
+                            <fieldset class="form-field-group" id="groupGender">
+                                <legend class="field-label">
+                                    <span class="label-text"><i class="fa-solid fa-venus-mars"></i> ភេទ (Gender)</span>
+                                    <span class="required-indicator" aria-hidden="true">*</span>
+                                </legend>
+                                <div class="radio-flex-group" role="radiogroup" aria-describedby="genderError">
+                                    <label class="custom-radio-card">
+                                        <input type="radio" name="gender" value="ប្រុស (Male)">
+                                        <span class="radio-box">
+                                            <i class="fa-solid fa-mars"></i>
+                                            <span class="radio-text">ប្រុស (Male)</span>
+                                        </span>
+                                    </label>
+                                    <label class="custom-radio-card">
+                                        <input type="radio" name="gender" value="ស្រី (Female)">
+                                        <span class="radio-box">
+                                            <i class="fa-solid fa-venus"></i>
+                                            <span class="radio-text">ស្រី (Female)</span>
+                                        </span>
+                                    </label>
+                                    <label class="custom-radio-card">
+                                        <input type="radio" name="gender" value="ផ្សេងៗ (Other)">
+                                        <span class="radio-box">
+                                            <i class="fa-solid fa-genderless"></i>
+                                            <span class="radio-text">ផ្សេងៗ (Other)</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-error" id="genderError" role="alert"></span>
+                                </div>
+                            </fieldset>
+
+                            <!-- Field 8: Study Mode -->
+                            <div class="form-field-group" id="groupStudyMode">
+                                <label for="studyMode" class="field-label">
+                                    <span class="label-text"><i class="fa-solid fa-desktop"></i> ទម្រង់សិក្សា (Learning Delivery Mode)</span>
+                                    <span class="required-indicator" aria-hidden="true">*</span>
+                                </label>
+                                <div class="select-control-wrapper">
+                                    <select id="studyMode" name="studyMode" class="form-select" required aria-required="true" aria-describedby="studyModeError">
+                                        <option value="" disabled selected>-- ជ្រើសរើសទម្រង់សិក្សា --</option>
+                                        <option value="On-Campus (រៀនផ្ទាល់ក្នុងបន្ទប់ពិសោធន៍)">រៀនផ្ទាល់ក្នុងបន្ទប់ពិសោធន៍ (On-Campus Labs)</option>
+                                        <option value="Live Online (រៀនអនឡាញអន្តរកម្មតាម Zoom/Teams)">រៀនអនឡាញអន្តរកម្ម (Live Interactive Online)</option>
+                                        <option value="Hybrid (រៀនរួមគ្នា ផ្ទាល់ និងអនឡាញ)">ទម្រង់ចម្រុះ (Hybrid Learning)</option>
+                                    </select>
+                                    <span class="select-arrow" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                                </div>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-error" id="studyModeError" role="alert"></span>
+                                </div>
+                            </div>
+
+                            <!-- Field 9: Additional Notes (Grid Full Width) -->
+                            <div class="form-field-group col-span-full" id="groupNote">
+                                <label for="note" class="field-label">
+                                    <span class="label-text"><i class="fa-regular fa-comment-dots"></i> សំណូមពរ ឬព័ត៌មានបន្ថែម (Additional Notes / Questions)</span>
+                                    <span class="optional-tag">មិនបង្ខំ</span>
+                                </label>
+                                <textarea id="note" name="note" class="form-textarea" rows="3" placeholder="សូមសរសេរសំណូមពរ ពេលវេលា ឬតម្រូវការពិសេសរបស់អ្នកនៅទីនេះ..."></textarea>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-hint">ជាជម្រើសសម្រាប់អ្នកដែលត្រូវការការសម្របសម្រួលពិសេស</span>
+                                </div>
+                            </div>
+
+                            <!-- Field 10: Terms & Agreement (Grid Full Width) -->
+                            <div class="form-field-group col-span-full agreement-block" id="groupTerms">
+                                <label class="custom-checkbox-card" for="termsAgree">
+                                    <input type="checkbox" id="termsAgree" name="termsAgree" required aria-required="true" aria-describedby="termsAgreeError">
+                                    <span class="checkbox-box" aria-hidden="true">
+                                        <i class="fa-solid fa-check"></i>
+                                    </span>
+                                    <span class="checkbox-text">
+                                        ខ្ញុំបានពិនិត្យ និងយល់ព្រមចំពោះ <strong>លក្ខខណ្ឌនៃការចុះឈ្មោះ</strong> និងបទបញ្ជាផ្ទៃក្នុងរបស់វិទ្យាស្ថាន។ ខ្ញុំធានាថាព័ត៌មានដែលបានផ្តល់ជូនខាងលើពិតជាត្រឹមត្រូវ។ <span class="required-indicator">*</span>
+                                    </span>
+                                </label>
+                                <div class="field-feedback-wrapper">
+                                    <span class="field-error" id="termsAgreeError" role="alert"></span>
+                                </div>
+                            </div>
+
+                        </div><!-- End CSS GRID -->
+
+                        <!-- ======================================================
+                             BUTTON GROUP (Flexbox)
+                             ====================================================== -->
+                        <div class="form-action-toolbar-flex">
+                            <div class="draft-indicator" id="draftStatus">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> <span id="draftStatusText">ទិន្នន័យត្រូវបានរក្សាទុកដោយស្វ័យប្រវត្តិ</span>
+                            </div>
+                            <div class="action-buttons-flex">
+                                <button type="button" id="resetBtn" class="btn btn-neutral" aria-label="លុបសម្អាតទម្រង់បែបបទ">
+                                    <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                                    <span>កំណត់ឡើងវិញ (Reset)</span>
+                                </button>
+                                <button type="submit" id="submitBtn" class="btn btn-primary btn-submit" aria-label="បញ្ជូនពាក្យចុះឈ្មោះ">
+                                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                                    <span id="submitBtnText">បញ្ជូនពាក្យចុះឈ្មោះ (Register)</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form><!-- FORM END -->
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SECTION 3: INSTITUTION HIGHLIGHTS (CSS Grid & Flexbox)
+             ================================================================== -->
+        <section id="about" class="section-block about-area" aria-labelledby="aboutHeading">
+            <div class="container">
+                <header class="section-title-wrapper text-center">
+                    <span class="section-kicker"><i class="fa-solid fa-shield-check"></i> Why Choose Us</span>
+                    <h2 id="aboutHeading" class="section-main-title">ស្តង់ដារបណ្តុះបណ្តាលដែលគួរឱ្យទុកចិត្ត</h2>
+                </header>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-certificate"></i></div>
+                        <h3 class="feature-title">វិញ្ញាបនបត្រមានតម្លៃ</h3>
+                        <p class="feature-desc">ទទួលបានវិញ្ញាបនបត្របញ្ជាក់ការសិក្សាដែលមានការទទួលស្គាល់ និងមាន QR Code ផ្ទៀងផ្ទាត់ផ្លូវការ។</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-laptop-file"></i></div>
+                        <h3 class="feature-title">គម្រោងអនុវត្តពិត</h3>
+                        <p class="feature-desc">ផ្តោតលើការកសាង Real-world Projects ដើម្បីបំពេញ Portfolio ផ្ទាល់ខ្លួនត្រៀមដាក់ពាក្យចូលបម្រើការងារ។</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper"><i class="fa-solid fa-user-group"></i></div>
+                        <h3 class="feature-title">ការប្រឹក្សាការងារ</h3>
+                        <p class="feature-desc">មានសហគមន៍ Alumni, គ្រូជំនួយផ្ទាល់ (Teaching Assistants) និងការណែនាំសម្ភាសន៍ការងារដោយឥតគិតថ្លៃ។</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SECTION 4: CONTACT & SUPPORT (Flexbox)
+             ================================================================== -->
+        <section id="contact" class="section-block contact-area" aria-labelledby="contactHeading">
+            <div class="container">
+                <div class="contact-card-wrapper">
+                    <div class="contact-header-text">
+                        <span class="section-kicker"><i class="fa-solid fa-headset"></i> Support & Admissions</span>
+                        <h2 id="contactHeading" class="contact-title">ត្រូវការជំនួយ ឬប្រឹក្សាការសិក្សា?</h2>
+                        <p class="contact-subtitle">ក្រុមការងារយើងខ្ញុំរីករាយស្វាគមន៍ និងផ្តល់ព័ត៌មានជូនលោកអ្នកជារៀងរាល់ថ្ងៃធ្វើការ។</p>
+                    </div>
+                    <div class="contact-items-flex">
+                        <div class="contact-pill-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <small>ទីតាំងបណ្តុះបណ្តាល</small>
+                                <strong>មហាវិថីសហព័ន្ធរុស្ស៊ី, រាជធានីភ្នំពេញ</strong>
+                            </div>
+                        </div>
+                        <div class="contact-pill-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <small>អ៊ីមែលផ្លូវការ</small>
+                                <strong>admissions@eduportal.edu.kh</strong>
+                            </div>
+                        </div>
+                        <div class="contact-pill-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <small>ខ្សែទូរស័ព្ទបន្ទាន់</small>
+                                <strong>(+855) 23 888 999 / 012 345 678</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======================================================================
+         OFFICIAL CONFIRMATION MODAL & SLIP (Accessible, Printable Dialog)
+         ====================================================================== -->
+    <div id="confirmationModal" class="modal-backdrop-overlay d-none" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+        
+        <div class="modal-dialog-box" tabindex="-1">
+
+            <!-- Modal Header (Flexbox) -->
+            <div class="modal-header-banner">
+                <div class="success-icon-badge">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="modal-header-text">
+                    <h3 id="modalTitle" class="modal-heading">ការចុះឈ្មោះទទួលបានជោគជ័យជាស្ថាពរ!</h3>
+                    <p id="modalDesc" class="modal-sub">Official Registration Confirmation & Verification Slip</p>
+                </div>
+                <button type="button" class="btn-modal-close" onclick="window.RegistrationApp.closeModal()" aria-label="បិទផ្ទាំងនេះ">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body / Official Receipt (Printable Area) -->
+            <div class="modal-body-scrollable">
+                <div class="printable-receipt-card" id="printableReceipt">
+                    
+                    <div class="receipt-branding-row">
+                        <div class="receipt-logo">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <div>
+                                <h4>វិទ្យាស្ថានបណ្តុះបណ្តាលបច្ចេកវិទ្យា EduPortal</h4>
+                                <small>EDUPORTAL INSTITUTE OF TECHNOLOGY</small>
+                            </div>
+                        </div>
+                        <div class="receipt-status-pill">
+                            <i class="fa-solid fa-circle-check"></i> បញ្ជាក់រួចរាល់ (CONFIRMED)
+                        </div>
+                    </div>
+
+                    <div class="receipt-code-bar">
+                        <div class="code-item">
+                            <span class="code-label">លេខកូដចុះឈ្មោះ (Reg No.):</span>
+                            <span class="code-val" id="receiptRegNumber">REG-2026-0000</span>
+                        </div>
+                        <div class="code-item">
+                            <span class="code-label">កាលបរិច្ឆេទ (Issue Date):</span>
+                            <span class="code-val" id="receiptTimestamp">--/--/----</span>
+                        </div>
+                    </div>
+
+                    <!-- CSS GRID: Receipt Attributes -->
+                    <div class="receipt-details-grid">
+                        <div class="receipt-cell">
+                            <span class="cell-label"><i class="fa-solid fa-user"></i> ឈ្មោះសិស្ស (Student Name)</span>
+                            <strong class="cell-data" id="confirmFullName">---</strong>
+                        </div>
+                        <div class="receipt-cell">
+                            <span class="cell-label"><i class="fa-solid fa-id-badge"></i> អត្តលេខ (Student ID)</span>
+                            <strong class="cell-data font-mono" id="confirmStudentId">---</strong>
+                        </div>
+                        <div class="receipt-cell">
+                            <span class="cell-label"><i class="fa-solid fa-venus-mars"></i> ភេទ (Gender)</span>
+                            <span class="cell-data" id="confirmGender">---</span>
+                        </div>
+                        <div class="receipt-cell">
+                            <span class="cell-label"><i class="fa-solid fa-envelope"></i> អ៊ីមែល (Email Address)</span>
+                            <span class="cell-data font-mono" id="confirmEmail">---</span>
+                        </div>
+                        <div class="receipt-cell">
+                            <span class="cell-label"><i class="fa-solid fa-phone"></i> លេខទូរស័ព្ទ (Phone Number)</span>
+                            <span class="cell-data font-mono" id="confirmPhone">---</span>
+                        </div>
+                        <div class="receipt-cell">
+                            <span class="cell-label"><i class="fa-solid fa-desktop"></i> ទម្រង់សិក្សា (Mode)</span>
+                            <span class="cell-data" id="confirmStudyMode">---</span>
+                        </div>
+                        <div class="receipt-cell full-span highlight-cell">
+                            <span class="cell-label"><i class="fa-solid fa-book-open"></i> វគ្គសិក្សាដែលបានចុះឈ្មោះ (Enrolled Course)</span>
+                            <strong class="cell-data course-highlight" id="confirmCourseName">---</strong>
+                        </div>
+                        <div class="receipt-cell full-span">
+                            <span class="cell-label"><i class="fa-regular fa-clock"></i> វេនសិក្សា (Schedule / Shift)</span>
+                            <span class="cell-data" id="confirmStudyShift">---</span>
+                        </div>
+                        <div class="receipt-cell full-span" id="receiptNoteWrapper">
+                            <span class="cell-label"><i class="fa-regular fa-comment"></i> សម្គាល់បន្ថែម (Notes)</span>
+                            <span class="cell-data italic-text" id="confirmNote">---</span>
+                        </div>
+                    </div>
+
+                    <div class="receipt-footer-notes">
+                        <p><i class="fa-solid fa-circle-info"></i> បង្ហាញប័ណ្ណនេះនៅថ្ងៃចូលរៀនដំបូង ឬបង្ហាញទៅកាន់ផ្នែករដ្ឋបាលតាមរយៈ Telegram: <strong>@eduportal_kh</strong>។</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal Action Buttons (Flexbox) -->
+            <div class="modal-footer-flex">
+                <button type="button" class="btn btn-outline-dark" onclick="window.RegistrationApp.printSlip()">
+                    <i class="fa-solid fa-print"></i> បោះពុម្ពប័ណ្ណ (Print Slip)
+                </button>
+                <button type="button" class="btn btn-primary" onclick="window.RegistrationApp.closeModal()">
+                    <i class="fa-solid fa-check"></i> រួចរាល់ និងបិទផ្ទាំង (Finish & Close)
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ======================================================================
+         SITE FOOTER (Flexbox)
+         ====================================================================== -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-content-flex">
+            <div class="footer-left">
+                <p>&copy; 2026 វិទ្យាស្ថានបណ្តុះបណ្តាលបច្ចេកវិទ្យា EduPortal. រក្សាសិទ្ធិគ្រប់យ៉ាង។</p>
+                <small class="footer-sub">Student Course Registration System (Enterprise Grade Edition)</small>
+            </div>
+            <div class="footer-right">
+                <span class="tech-pill"><i class="fa-brands fa-html5"></i> Semantic HTML5</span>
+                <span class="tech-pill"><i class="fa-brands fa-css3-alt"></i> CSS Grid & Flexbox</span>
+                <span class="tech-pill"><i class="fa-brands fa-js"></i> Vanilla JavaScript</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Modular Application Script -->
+    <script src="script.js"></script>
+</body>
+</html>

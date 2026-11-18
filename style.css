@@ -1,0 +1,1787 @@
+/**
+ * ============================================================================
+ * PROJECT: Student Course Registration System (Enterprise Edition)
+ * STACK: Semantic HTML5, Modern CSS (Grid & Flexbox), Vanilla JavaScript
+ * ARCHITECTURE:
+ *   1. CSS Reset & Base Design Tokens
+ *   2. Utility Classes & Typography
+ *   3. Header & Navigation (FLEXBOX)
+ *   4. Hero Banner & Stats (FLEXBOX)
+ *   5. Course Cards Showcase (CSS GRID)
+ *   6. Registration Form (CSS GRID & FLEXBOX)
+ *   7. Feature Highlights & Support (GRID & FLEXBOX)
+ *   8. Modal Dialog & Printable Receipt (FLEXBOX, GRID & PRINT)
+ *   9. Toast Notifications & Micro-Animations
+ *  10. Responsive Media Queries (Mobile First & Breakpoints)
+ * ============================================================================
+ */
+
+/* ============================================================================
+   1. CSS Reset & Base Design Tokens
+   ============================================================================ */
+:root {
+    /* Brand Color Palette */
+    --color-primary-50:  #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+    --color-primary-950: #172554;
+
+    /* Secondary / Neutral Slate Scale */
+    --color-slate-50:  #f8fafc;
+    --color-slate-100: #f1f5f9;
+    --color-slate-200: #e2e8f0;
+    --color-slate-300: #cbd5e1;
+    --color-slate-400: #94a3b8;
+    --color-slate-500: #64748b;
+    --color-slate-600: #475569;
+    --color-slate-700: #334155;
+    --color-slate-800: #1e293b;
+    --color-slate-900: #0f172a;
+
+    /* Accent & Functional Colors */
+    --color-accent:       #f59e0b;
+    --color-accent-hover: #d97706;
+    --color-success:      #10b981;
+    --color-success-bg:   #ecfdf5;
+    --color-success-text: #065f46;
+    --color-danger:       #ef4444;
+    --color-danger-bg:    #fef2f2;
+    --color-danger-text:  #991b1b;
+    --color-info:         #0284c7;
+
+    /* Typography */
+    --font-khmer: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-sans:  'Plus Jakarta Sans', var(--font-khmer), sans-serif;
+    --font-mono:  'JetBrains Mono', monospace;
+
+    /* Elevations & Shadows */
+    --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.1), 0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.25);
+
+    /* Radii & Transitions */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 22px;
+    --radius-full: 9999px;
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Modern CSS Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-slate-50);
+    color: var(--color-slate-800);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Accessibility: Skip Link */
+.skip-to-content {
+    position: absolute;
+    top: -50px;
+    left: 20px;
+    background: var(--color-primary-900);
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    z-index: 9999;
+    font-weight: 600;
+    transition: top var(--transition-fast);
+}
+.skip-to-content:focus {
+    top: 15px;
+}
+
+/* ============================================================================
+   2. Utility Classes & Typography
+   ============================================================================ */
+.container {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 20px;
+}
+
+.text-center { text-align: center; }
+.font-mono { font-family: var(--font-mono); }
+.uppercase-text { text-transform: uppercase; }
+.italic-text { font-style: italic; }
+.d-none { display: none !important; }
+
+.section-block {
+    padding-block: 70px;
+}
+
+.section-title-wrapper {
+    margin-bottom: 46px;
+}
+
+.section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.section-main-title {
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    font-weight: 800;
+    color: var(--color-slate-900);
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+.section-lead-text {
+    font-size: 1.05rem;
+    color: var(--color-slate-600);
+    max-width: 680px;
+    margin-inline: auto;
+}
+
+/* Standard Reusable Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 11px 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition-base);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--color-primary-200);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background-color: var(--color-primary-600);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-700);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+}
+
+.btn-secondary-accent {
+    background-color: var(--color-accent);
+    color: var(--color-slate-950);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+}
+.btn-secondary-accent:hover {
+    background-color: var(--color-accent-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.btn-outline-light {
+    background-color: transparent;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+.btn-outline-light:hover {
+    background-color: #ffffff;
+    color: var(--color-primary-900);
+}
+
+.btn-neutral {
+    background-color: var(--color-slate-100);
+    color: var(--color-slate-700);
+    border-color: var(--color-slate-300);
+}
+.btn-neutral:hover {
+    background-color: var(--color-slate-200);
+    color: var(--color-slate-900);
+}
+
+.btn-outline-dark {
+    background-color: transparent;
+    color: var(--color-slate-700);
+    border-color: var(--color-slate-300);
+}
+.btn-outline-dark:hover {
+    background-color: var(--color-slate-100);
+    color: var(--color-slate-900);
+}
+
+/* ============================================================================
+   3. Top Announcement & Navigation (FLEXBOX)
+   ============================================================================ */
+.top-announcement-bar {
+    background-color: var(--color-primary-950);
+    color: var(--color-slate-200);
+    font-size: 0.82rem;
+    padding-block: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* FLEXBOX: Top Announcement Inner */
+.announcement-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.announcement-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge-pill {
+    background-color: var(--color-accent);
+    color: var(--color-slate-950);
+    font-weight: 700;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+
+.announcement-links .hotline strong {
+    color: #ffffff;
+}
+
+/* Site Header */
+.site-header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-slate-200);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-xs);
+    transition: var(--transition-base);
+}
+
+/* FLEXBOX: Header Container */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 14px;
+    gap: 20px;
+}
+
+/* FLEXBOX: Brand Logo */
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-900));
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-size: 1.35rem;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.brand-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-slate-900);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.brand-accent {
+    color: var(--color-primary-600);
+}
+
+.brand-tagline {
+    font-size: 0.75rem;
+    color: var(--color-slate-500);
+    font-weight: 500;
+}
+
+/* Mobile Toggle Button */
+.mobile-nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-slate-800);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: var(--radius-sm);
+}
+
+/* FLEXBOX: Navigation (Items 1, 2, 3, 4, 5) */
+.main-nav .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+}
+
+.nav-item .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--color-slate-600);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.nav-item .nav-link:hover {
+    color: var(--color-primary-600);
+    background-color: var(--color-primary-50);
+}
+
+.nav-item .nav-link.active {
+    color: var(--color-primary-700);
+    background-color: var(--color-primary-100);
+}
+
+.nav-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: var(--color-slate-200);
+    color: var(--color-slate-700);
+    font-size: 0.74rem;
+    font-weight: 700;
+    transition: var(--transition-fast);
+}
+
+.nav-link:hover .nav-badge,
+.nav-link.active .nav-badge {
+    background-color: var(--color-primary-600);
+    color: #ffffff;
+}
+
+.nav-link.highlight-link {
+    background-color: var(--color-primary-50);
+    border: 1px solid var(--color-primary-200);
+    color: var(--color-primary-700);
+}
+
+.header-actions .btn-cta {
+    padding: 9px 18px;
+    font-size: 0.88rem;
+}
+
+/* ============================================================================
+   4. Hero Banner & Stats (FLEXBOX)
+   ============================================================================ */
+.hero-section {
+    background: radial-gradient(circle at 80% 20%, #1e40af 0%, #1e3a8a 50%, #0f172a 100%);
+    color: #ffffff;
+    padding-block: 75px 85px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 18px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #93c5fd, #60a5fa, #fcd34d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    color: #dbeafe;
+    max-width: 780px;
+    margin-bottom: 34px;
+    line-height: 1.8;
+}
+
+/* FLEXBOX: Hero Actions */
+.hero-actions-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+/* FLEXBOX: Hero Stats */
+.hero-stats-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 20px 36px;
+    border-radius: var(--radius-xl);
+}
+
+.hero-stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    font-family: var(--font-mono);
+    line-height: 1.1;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #93c5fd;
+    font-weight: 500;
+}
+
+/* ============================================================================
+   5. Course Cards Showcase (CSS GRID)
+   ============================================================================ */
+.courses-area {
+    background-color: var(--color-slate-50);
+}
+
+/* ============================================================================
+   EXPLICIT CSS GRID: Course Cards (4 Columns Responsive Grid)
+   ============================================================================ */
+.course-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 Cards on Desktop */
+    gap: 26px;
+}
+
+.course-card {
+    background-color: #ffffff;
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-primary-200);
+}
+
+.course-card-visual {
+    position: relative;
+    height: 195px;
+    overflow: hidden;
+}
+
+.course-card-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.course-card:hover .course-card-visual img {
+    transform: scale(1.08);
+}
+
+.course-tag {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.course-tag.popular { background-color: var(--color-accent); }
+.course-tag.hot     { background-color: var(--color-danger); }
+.course-tag.new     { background-color: var(--color-success); }
+.course-tag.pro     { background-color: #8b5cf6; }
+
+.course-level-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    font-size: 0.74rem;
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.course-card-content {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.course-meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.course-code-pill {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-700);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-primary-200);
+}
+
+.course-rating {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-slate-600);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.course-rating i { color: #f59e0b; }
+
+.course-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-slate-900);
+    margin-bottom: 10px;
+    line-height: 1.35;
+    min-height: 2.7em;
+}
+
+.course-summary {
+    font-size: 0.88rem;
+    color: var(--color-slate-600);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    flex-grow: 1;
+}
+
+.course-features-list {
+    background-color: var(--color-slate-50);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--color-slate-700);
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.feature-item i {
+    width: 14px;
+    color: var(--color-primary-600);
+}
+
+/* FLEXBOX: Course Card Footer */
+.course-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-slate-200);
+    margin-top: auto;
+    gap: 12px;
+}
+
+.price-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-caption {
+    font-size: 0.72rem;
+    color: var(--color-slate-400);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.price-amount {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-primary-600);
+    line-height: 1.1;
+    font-family: var(--font-mono);
+}
+
+.currency-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-slate-500);
+}
+
+.btn-select-course {
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-700);
+    border: 1px solid var(--color-primary-200);
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-fast);
+}
+
+.btn-select-course:hover {
+    background-color: var(--color-primary-600);
+    color: #ffffff;
+    border-color: var(--color-primary-600);
+    transform: translateY(-1px);
+}
+
+/* ============================================================================
+   6. Registration Form (CSS GRID & FLEXBOX)
+   ============================================================================ */
+.registration-area {
+    background-color: #ffffff;
+    border-top: 1px solid var(--color-slate-200);
+    border-bottom: 1px solid var(--color-slate-200);
+}
+
+.form-container-card {
+    background-color: #ffffff;
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    padding: 44px;
+    max-width: 1020px;
+    margin-inline: auto;
+}
+
+/* FLEXBOX: Form Card Header */
+.form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 26px;
+    border-bottom: 2px solid var(--color-slate-100);
+    margin-bottom: 28px;
+}
+
+.header-icon-box {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
+    color: var(--color-primary-700);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.header-copy .badge-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--color-primary-700);
+    background-color: var(--color-primary-50);
+    padding: 2px 10px;
+    border-radius: var(--radius-full);
+    margin-bottom: 6px;
+}
+
+.form-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-slate-900);
+    margin-bottom: 4px;
+}
+
+.form-subtext {
+    font-size: 0.94rem;
+    color: var(--color-slate-600);
+}
+
+.required-indicator {
+    color: var(--color-danger);
+    font-weight: 700;
+}
+
+/* Course Selected Ribbon (Flexbox) */
+.course-selected-ribbon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #ecfdf5, #f0fdf4);
+    border: 1px solid #a7f3d0;
+    color: var(--color-success-text);
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 26px;
+    animation: fadeIn var(--transition-base);
+}
+
+.course-selected-ribbon .ribbon-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.94rem;
+}
+
+.ribbon-price-badge {
+    background-color: var(--color-success);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.84rem;
+}
+
+.btn-ribbon-clear {
+    background: transparent;
+    border: none;
+    color: var(--color-slate-400);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+}
+.btn-ribbon-clear:hover {
+    color: var(--color-danger);
+}
+
+/* Alert Banner */
+.alert-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 26px;
+    font-size: 0.92rem;
+}
+
+.alert-danger {
+    background-color: var(--color-danger-bg);
+    border: 1px solid #fecaca;
+    color: var(--color-danger-text);
+}
+
+.alert-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+/* ============================================================================
+   EXPLICIT CSS GRID: Form Fields (2 Columns)
+   ============================================================================ */
+.form-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 Column Form Grid */
+    gap: 24px 28px;
+    margin-bottom: 32px;
+}
+
+.form-field-group {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-field-group.col-span-full {
+    grid-column: 1 / -1; /* Spans across both columns */
+}
+
+.field-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-slate-700);
+    margin-bottom: 8px;
+}
+
+.field-label .label-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.field-label .label-text i {
+    color: var(--color-primary-600);
+    font-size: 0.9rem;
+}
+
+.optional-tag {
+    font-size: 0.75rem;
+    color: var(--color-slate-400);
+    font-weight: 500;
+}
+
+/* Input Control Wrappers */
+.input-control-wrapper,
+.select-control-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--color-slate-300);
+    border-radius: var(--radius-md);
+    font-size: 0.96rem;
+    color: var(--color-slate-900);
+    background-color: #ffffff;
+    transition: var(--transition-fast);
+    outline: none;
+    font-family: inherit;
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+    border-color: var(--color-slate-400);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: var(--color-primary-600);
+    box-shadow: 0 0 0 4px var(--color-primary-100);
+}
+
+/* Validation Feedback States */
+.form-input.is-valid,
+.form-select.is-valid {
+    border-color: var(--color-success);
+    background-color: #fcfdfd;
+}
+
+.form-input.is-invalid,
+.form-select.is-invalid,
+.form-textarea.is-invalid {
+    border-color: var(--color-danger);
+    background-color: #fffafb;
+}
+
+.form-input.is-invalid:focus,
+.form-select.is-invalid:focus {
+    box-shadow: 0 0 0 4px #fee2e2;
+}
+
+.field-status-icon {
+    position: absolute;
+    right: 14px;
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+.form-input.is-valid + .field-status-icon::before {
+    content: "\f058";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--color-success);
+}
+
+.form-input.is-invalid + .field-status-icon::before {
+    content: "\f06a";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--color-danger);
+}
+
+.select-control-wrapper {
+    position: relative;
+}
+
+.form-select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 40px;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 14px;
+    pointer-events: none;
+    color: var(--color-slate-400);
+    font-size: 0.85rem;
+}
+
+/* Field Feedback Texts */
+.field-feedback-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    min-height: 1.25rem;
+}
+
+.field-hint {
+    font-size: 0.78rem;
+    color: var(--color-slate-500);
+}
+
+.field-error {
+    font-size: 0.8rem;
+    color: var(--color-danger);
+    font-weight: 600;
+    display: none;
+}
+
+.field-error:not(:empty) {
+    display: block;
+    animation: fadeIn 150ms ease-in;
+}
+
+/* FLEXBOX: Radio Cards for Gender */
+.radio-flex-group {
+    display: flex;
+    gap: 12px;
+}
+
+.custom-radio-card {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-radio-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.radio-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border: 1.5px solid var(--color-slate-300);
+    border-radius: var(--radius-md);
+    background-color: var(--color-slate-50);
+    color: var(--color-slate-700);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition-fast);
+}
+
+.custom-radio-card input[type="radio"]:checked + .radio-box {
+    border-color: var(--color-primary-600);
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-700);
+    box-shadow: 0 0 0 2px var(--color-primary-200);
+}
+
+/* Terms Agreement Card */
+.agreement-block {
+    background-color: var(--color-slate-50);
+    border: 1.5px dashed var(--color-slate-300);
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+}
+
+.custom-checkbox-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.custom-checkbox-card input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.checkbox-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--color-slate-400);
+    border-radius: var(--radius-sm);
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: var(--transition-fast);
+}
+
+.custom-checkbox-card input[type="checkbox"]:checked + .checkbox-box {
+    background-color: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+    color: #ffffff;
+}
+
+.checkbox-text {
+    font-size: 0.9rem;
+    color: var(--color-slate-700);
+    line-height: 1.5;
+}
+
+/* ============================================================================
+   FLEXBOX: Button Group & Form Actions Toolbar
+   ============================================================================ */
+.form-action-toolbar-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 22px;
+    border-top: 1px solid var(--color-slate-200);
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.draft-indicator {
+    font-size: 0.82rem;
+    color: var(--color-slate-500);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-buttons-flex {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-submit {
+    min-width: 220px;
+    font-size: 1rem;
+    padding-block: 13px;
+}
+
+/* ============================================================================
+   7. Feature Highlights & Support (GRID & FLEXBOX)
+   ============================================================================ */
+.about-area {
+    background-color: #ffffff;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.feature-card {
+    background-color: var(--color-slate-50);
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-lg);
+    padding: 32px 26px;
+    text-align: center;
+    transition: var(--transition-base);
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    background-color: #ffffff;
+}
+
+.feature-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    margin-inline: auto;
+    margin-bottom: 20px;
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-700);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.feature-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-slate-900);
+    margin-bottom: 10px;
+}
+
+.feature-desc {
+    font-size: 0.92rem;
+    color: var(--color-slate-600);
+}
+
+/* Contact Area */
+.contact-area {
+    background-color: var(--color-slate-100);
+}
+
+.contact-card-wrapper {
+    background-color: #ffffff;
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-xl);
+    padding: 44px;
+    text-align: center;
+}
+
+.contact-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-slate-900);
+    margin-bottom: 8px;
+}
+
+.contact-subtitle {
+    color: var(--color-slate-600);
+    margin-bottom: 30px;
+}
+
+/* FLEXBOX: Contact Items */
+.contact-items-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.contact-pill-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--color-slate-50);
+    border: 1px solid var(--color-slate-200);
+    padding: 14px 22px;
+    border-radius: var(--radius-lg);
+    text-align: left;
+}
+
+.contact-pill-item i {
+    font-size: 1.4rem;
+    color: var(--color-primary-600);
+}
+
+.contact-pill-item small {
+    display: block;
+    font-size: 0.74rem;
+    color: var(--color-slate-400);
+    text-transform: uppercase;
+}
+
+.contact-pill-item strong {
+    font-size: 0.94rem;
+    color: var(--color-slate-800);
+}
+
+/* ============================================================================
+   8. Modal Dialog & Printable Receipt (FLEXBOX, GRID & PRINT)
+   ============================================================================ */
+.modal-backdrop-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex; /* Flexbox centering */
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-dialog-box {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 680px;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: zoomIn 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+/* FLEXBOX: Modal Header */
+.modal-header-banner {
+    background: linear-gradient(135deg, #065f46, #059669);
+    color: #ffffff;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+}
+
+.success-icon-badge {
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.modal-heading {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 2px;
+}
+
+.modal-sub {
+    font-size: 0.84rem;
+    opacity: 0.9;
+}
+
+.btn-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+.modal-body-scrollable {
+    padding: 28px;
+    max-height: 68vh;
+    overflow-y: auto;
+}
+
+/* Printable Official Slip */
+.printable-receipt-card {
+    background-color: var(--color-slate-50);
+    border: 1.5px solid var(--color-slate-200);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+}
+
+/* FLEXBOX: Receipt Branding */
+.receipt-branding-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 2px dashed var(--color-slate-300);
+    margin-bottom: 18px;
+    gap: 12px;
+}
+
+.receipt-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.receipt-logo i {
+    font-size: 1.8rem;
+    color: var(--color-primary-700);
+}
+.receipt-logo h4 {
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: var(--color-slate-900);
+}
+.receipt-logo small {
+    font-size: 0.72rem;
+    color: var(--color-slate-500);
+    letter-spacing: 0.5px;
+}
+
+.receipt-status-pill {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* FLEXBOX: Code Bar */
+.receipt-code-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    margin-bottom: 18px;
+    font-size: 0.85rem;
+}
+
+.code-item {
+    display: flex;
+    gap: 8px;
+}
+.code-label { color: var(--color-slate-500); }
+.code-val {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--color-primary-700);
+}
+
+/* ============================================================================
+   EXPLICIT CSS GRID: Receipt Attributes Grid
+   ============================================================================ */
+.receipt-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    background-color: #ffffff;
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.receipt-cell {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-slate-100);
+}
+
+.receipt-cell.full-span {
+    grid-column: 1 / -1;
+}
+
+.cell-label {
+    font-size: 0.76rem;
+    color: var(--color-slate-500);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+}
+.cell-label i {
+    width: 14px;
+    color: var(--color-primary-600);
+}
+
+.cell-data {
+    font-size: 0.92rem;
+    color: var(--color-slate-900);
+    font-weight: 600;
+}
+
+.course-highlight {
+    color: var(--color-primary-700);
+    font-size: 1.05rem;
+}
+
+.receipt-footer-notes {
+    font-size: 0.78rem;
+    color: var(--color-slate-500);
+    border-top: 1px dashed var(--color-slate-300);
+    padding-top: 12px;
+}
+
+/* FLEXBOX: Modal Footer */
+.modal-footer-flex {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 28px;
+    background-color: var(--color-slate-50);
+    border-top: 1px solid var(--color-slate-200);
+}
+
+/* ============================================================================
+   9. Toast Notifications & Micro-Animations
+   ============================================================================ */
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    background-color: var(--color-slate-900);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-lg);
+    pointer-events: auto;
+    animation: slideUp 250ms ease-out;
+    border-left: 4px solid var(--color-primary-500);
+}
+
+.toast.toast-success {
+    border-left-color: var(--color-success);
+}
+
+.toast.toast-error {
+    border-left-color: var(--color-danger);
+}
+
+/* Footer Section */
+.site-footer {
+    background-color: var(--color-slate-950);
+    color: var(--color-slate-400);
+    padding-block: 28px;
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.88rem;
+}
+
+/* FLEXBOX: Footer Content */
+.footer-content-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-sub {
+    color: var(--color-slate-500);
+    font-size: 0.78rem;
+}
+
+.tech-pill {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    margin-left: 6px;
+    color: var(--color-slate-300);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse animation for announcement */
+.pulse {
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ============================================================================
+   10. Comprehensive Print Styles (@media print)
+   ============================================================================ */
+@media print {
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    /* Hide unnecessary UI elements when printing receipt */
+    .top-announcement-bar,
+    .site-header,
+    .hero-section,
+    .courses-area,
+    .registration-area,
+    .about-area,
+    .contact-area,
+    .site-footer,
+    .modal-header-banner,
+    .modal-footer-flex,
+    .toast-container {
+        display: none !important;
+    }
+
+    .modal-backdrop-overlay {
+        position: static !important;
+        background: none !important;
+        padding: 0 !important;
+    }
+
+    .modal-dialog-box {
+        box-shadow: none !important;
+        max-width: 100% !important;
+        border: none !important;
+    }
+
+    .printable-receipt-card {
+        border: 2px solid #000000 !important;
+        background: #ffffff !important;
+        padding: 30px !important;
+    }
+
+    .receipt-code-bar,
+    .receipt-details-grid {
+        border: 1px solid #333333 !important;
+        background: #ffffff !important;
+    }
+
+    .receipt-cell {
+        border-bottom: 1px solid #cccccc !important;
+    }
+}
+
+/* ============================================================================
+   11. Responsive Media Queries
+   ============================================================================ */
+/* Tablet & Medium Screens (max-width: 1080px) */
+@media (max-width: 1080px) {
+    .course-cards-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 Grid */
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Mobile & Small Screens (max-width: 768px) */
+@media (max-width: 768px) {
+    .top-announcement-bar {
+        display: none;
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+    }
+
+    .main-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #ffffff;
+        border-bottom: 1px solid var(--color-slate-200);
+        box-shadow: var(--shadow-lg);
+        padding: 16px 20px;
+        display: none;
+    }
+
+    .main-nav.nav-open {
+        display: block;
+    }
+
+    .main-nav .nav-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .header-actions {
+        display: none;
+    }
+
+    .hero-stats-wrapper {
+        gap: 20px;
+        padding: 16px 20px;
+    }
+
+    .course-cards-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+
+    .form-container-card {
+        padding: 24px 18px;
+    }
+
+    .form-grid-layout {
+        grid-template-columns: 1fr; /* 1 Column Form */
+        gap: 18px;
+    }
+
+    .radio-flex-group {
+        flex-direction: column;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-action-toolbar-flex {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .action-buttons-flex {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .action-buttons-flex .btn {
+        width: 100%;
+    }
+
+    .contact-card-wrapper {
+        padding: 28px 18px;
+    }
+
+    .contact-items-flex {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .receipt-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-footer-flex {
+        flex-direction: column-reverse;
+    }
+    .modal-footer-flex .btn {
+        width: 100%;
+    }
+
+    .footer-content-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+}
